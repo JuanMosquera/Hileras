@@ -14,33 +14,33 @@ public class ListaDoblementeLigada{
     
     private NodoDoble primero, ultimo;
     
-    public ListaDoblementeLigada()
+    public ListaDoblementeLigada()//Constructor de la clase ListaDoblementeLigada
     {
         primero = null;
         ultimo = null;
     }
     
-    public NodoDoble primerNodo()
+    public NodoDoble primerNodo()//Retorna el primer Nodo de la Lista
     {
         return primero;
     }
     
-    public NodoDoble ultimoNodo()
+    public NodoDoble ultimoNodo()//Retorna el último Nodo de la Lista
     {
         return ultimo;
     }
     
-    public boolean finDeRecorrido(NodoDoble x)
+    public boolean finDeRecorrido(NodoDoble x) //Devuelve verdadero si el nodo ingresado es igual a nulo
     {
         return x==null;
     }
     
-    public boolean esVacia()
+    public boolean esVacia() //Verifica si la lista no tiene ningún dato
     {
         return primero==null;
     }
     
-    public void  recorreIzqDer()
+    public void  recorreIzqDer()//Recorre la lista por sus Ligas derechas
     {
         NodoDoble p;
         p = primerNodo();
@@ -51,7 +51,7 @@ public class ListaDoblementeLigada{
         }
     }
     
-    public void recorreDerIzq()
+    public void recorreDerIzq()//Recorre la lista por sus ligas izquierdas
     {
         NodoDoble p;
         p = ultimoNodo();
@@ -62,14 +62,14 @@ public class ListaDoblementeLigada{
         }
     }
     
-    public void insertar(Object d, NodoDoble y)
+    public void insertar(Object d, NodoDoble y) //Inserta un nuevo nodo con objecto d
     {
         NodoDoble x;
         x = new NodoDoble(d);
         conectar(x,y);
     }
     
-    public void conectar(NodoDoble x, NodoDoble y)
+    public void conectar(NodoDoble x, NodoDoble y) //Conecta el nodo X con el nodo Y
     {
        if(y==null)
        {
@@ -99,7 +99,7 @@ public class ListaDoblementeLigada{
        }
     }
     
-    public void desconectar(NodoDoble x)
+    public void desconectar(NodoDoble x)//Desconecta el nodo X de la lista
     {
         if(x.retornaLi()==null)
         {
@@ -125,7 +125,7 @@ public class ListaDoblementeLigada{
         }
     }
     
-    public void borrar(NodoDoble x)
+    public void borrar(NodoDoble x) //Busca el nodo X en la lista y lo desconecta
     {
         if(x==null)
         {

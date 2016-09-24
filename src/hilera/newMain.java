@@ -15,9 +15,9 @@ public class newMain{
      */
     public static void main(String[] args) 
     {
-        Hilera h = new Hilera('a');
+        Hilera h = new Hilera('n');
         System.out.println(h.primerNodo().retornaDato()+""+h.longitud());
-        h.insertar('b', h.primerNodo());
+        h.insertar('a', h.primerNodo());
         System.out.println(h.primerNodo().retornaLd().retornaDato()+""+h.primerNodo().retornaDato()+""+h.longitud());
         h.recorreDerIzq();
         h.recorreIzqDer();
@@ -39,7 +39,8 @@ public class newMain{
         
         h.recorreIzqDer();
         System.out.println(h.longitud());
-        Hilera d = h.subHilera(4, 5);
+        Hilera d = h.subHilera(3, 4);
+        System.out.println("Hilera d: ");
         d.recorreIzqDer();
         Hilera s = h.copiaHilera();
         Hilera n = d.concat(s);
@@ -47,6 +48,11 @@ public class newMain{
         s.recorreIzqDer();
         System.out.println("Hilera n : ");
         n.recorreIzqDer();
+        h.borrarHilera(3, 4);
+        System.out.println("Hilera h con borrar: ");
+        h.recorreIzqDer();
+        NodoDoble x = s.posicion(d);
+        System.out.println(x.retornaDato());
     }
     
 }

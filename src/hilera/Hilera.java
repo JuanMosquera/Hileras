@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hilera;
-
 /**
  *
  * @author marioh.ramirez
@@ -12,9 +6,9 @@ package hilera;
 public class Hilera extends ListaDoblementeLigada 
 {
       
-    public Hilera(char letra)
+    public Hilera(char letra)//Constructor de la clase Hilera
     {
-        insertar(letra, null);
+        insertar(letra, null);//Inserta un char como primer nodo
     }
     
     public int longitud() //Retorna la longitud de la hilera
@@ -67,7 +61,7 @@ public class Hilera extends ListaDoblementeLigada
         return s;
     }
     
-    public Hilera concat(Hilera t)
+    public Hilera concat(Hilera t)//Concatena la hilera que llame al método co´n la hilera t que se envia como parametro
     {
         Hilera s;
         NodoDoble p = primerNodo();
@@ -81,7 +75,7 @@ public class Hilera extends ListaDoblementeLigada
         return s;
     }
     
-    public Hilera copiaHilera()
+    public Hilera copiaHilera()//Copia la hilera que invoque el método en otra hilera
     {
         Hilera s;
         NodoDoble p;
@@ -101,8 +95,61 @@ public class Hilera extends ListaDoblementeLigada
         
     }
     
-    /*public int posicion(Hilera s)
+    public void borrarHilera(int i, int j)//Borra parcial o totalmente una hilera
     {
-        
-    }*/
+        int k, n;
+        n = longitud();
+        if(i<1 || i>n)
+        {
+            System.out.println("Parámetro inválido");
+            return;
+        }
+        if(j<1 || j>n-i+1)
+        {
+            System.out.println("Parámetro inválido");
+            return;
+        }
+        NodoDoble p;
+        p = primerNodo();
+        k = 1;
+        while(k<i)
+        {
+            p = p.retornaLd();
+            k = k+1;
+        }
+        k = 0;
+        while(k<j)
+        {
+            desconectar(p);
+            p = p.retornaLd();
+            k=k+1;
+        }
+    }
+    
+    public NodoDoble posicion(Hilera s)//Devuelve el nodo en el cuál comience la hilera que se ingresa como parámetro, dentro de otra hilera
+    {
+        NodoDoble p, pp, q;
+        p = primerNodo();
+        pp = p;
+        q = s.primerNodo();
+        while(!finDeRecorrido(p) && !s.finDeRecorrido(q))
+        {
+            if(p.retornaDato()==q.retornaDato())
+            {
+                p = p.retornaLd();
+                q = q.retornaLd();
+                if(s.finDeRecorrido(q))
+                {
+                    return pp;
+                }
+            }
+            else
+            {
+                pp = pp.retornaLd();
+                p = pp;
+                q = s.primerNodo();
+            }
+        }
+        return null;
+    }
 }
