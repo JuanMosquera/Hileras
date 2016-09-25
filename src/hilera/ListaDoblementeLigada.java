@@ -62,6 +62,19 @@ public class ListaDoblementeLigada{
         }
     }
     
+    public NodoDoble buscaDondeInsertar(Object d)
+    {
+        NodoDoble p, y;
+        p = primerNodo();
+        y = p.retornaLi();
+        while(!finDeRecorrido(p) && (char)p.retornaDato()<(char)d)
+        {
+            y = p;
+            p = p.retornaLd();
+        }
+        return y;
+    }
+    
     public void insertar(Object d, NodoDoble y) //Inserta un nuevo nodo con objecto d
     {
         NodoDoble x;
