@@ -36,18 +36,33 @@ public class ListaDoblementeLigada{
     }
     
     public boolean esVacia() //Verifica si la lista no tiene ningún dato
-    {
-        return primero==null;
+    {        
+        if(primero.retornaDato()==null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        //return primero==null;
     }
     
     public void  recorreIzqDer()//Recorre la lista por sus Ligas derechas
     {
         NodoDoble p;
         p = primerNodo();
-        while(!finDeRecorrido(p))
+        if(!esVacia())
         {
-            System.out.println(p.retornaDato());;
-            p = p.retornaLd();
+            while(!finDeRecorrido(p))
+            {
+                System.out.println(p.retornaDato());;
+                p = p.retornaLd();
+            }
+        }
+        else
+        {
+            System.out.println("Es vacía"+esVacia());
         }
     }
     

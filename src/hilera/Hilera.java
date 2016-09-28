@@ -11,6 +11,20 @@ public class Hilera extends ListaDoblementeLigada
         insertar(letra, null);//Inserta un char como primer nodo
     }
     
+    public void insertarHilera(String palabra)
+    {
+        char letra;
+        letra = palabra.charAt(0);
+        insertar(letra,null);
+        NodoDoble p = primerNodo();
+        for(int i=1;i<palabra.length();i++) //Pasa el String a char y construye la hilera representada como Lista Doblemente Ligada
+        {
+            letra = palabra.charAt(i);
+            insertar(letra, p);
+            p = p.retornaLd();
+        }
+    }
+    
     public int longitud() //Retorna la longitud de la hilera
     {
         NodoDoble p;
@@ -23,6 +37,8 @@ public class Hilera extends ListaDoblementeLigada
         }
         return i;
     }
+    
+    public void anagrama(){}
     
     public Hilera subHilera(int i, int j)//Devuelve una hilera desde la posición i de la hilera original y toma j caracteres
     {
@@ -90,6 +106,16 @@ public class Hilera extends ListaDoblementeLigada
         return s;
     } 
     
+    public void borrarHilera()
+    {
+        primerNodo().asignaLd(null);
+        primerNodo().asignaLi(null);
+        ultimoNodo().asignaLd(null);
+        ultimoNodo().asignaLi(null);
+        primerNodo().asignaDato(null);
+        borrar(primerNodo());
+    }
+    
     public void borrarHilera(int i, int j)//Borra parcial o totalmente una hilera
     {
         int k, n;
@@ -149,9 +175,10 @@ public class Hilera extends ListaDoblementeLigada
         
     }
     
-    public void replace(int i, int j, Hilera s)            
+    public void replace(String s)            
     {
-        
+        borrarHilera();        
+        insertarHilera(s);        
     }
     
     public boolean esPalindromo() //Devuelve verdadero si la hilera es un palindromo

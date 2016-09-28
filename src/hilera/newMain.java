@@ -16,28 +16,32 @@ public class newMain{
     public static void main(String[] args) 
     {
         Hilera h = new Hilera('a');//Construye la hilera h
+       // ListaDoblementeLigada listas = new ListaDoblementeLigada();
+        //listas.insertar(h, null);
         NodoDoble p = h.primerNodo(); 
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
-        char letra = 0;
         String l = "";
         try //Lee el string que será la hilera
            {
                l = br.readLine();               
            }catch(IOException e){}
-        for(int i=0;i<l.length();i++) //Pasa el String a char y construye la hilera representada como Lista Doblemente Ligada
-        {
-            letra = l.charAt(i);
-            h.insertar(letra, p);
-            p = p.retornaLd();
-        }
+        h.insertarHilera(l);
+        /*h.replace("mario");
+        h.recorreIzqDer();*/
+//        for(int i=0;i<l.length();i++) //Pasa el String a char y construye la hilera representada como Lista Doblemente Ligada
+//        {
+//            letra = l.charAt(i);
+//            h.insertar(letra, p);
+//            p = p.retornaLd();
+//        }
         
         h.recorreIzqDer();//Prueba para recorre la hilera h una vez construida
         Hilera invertir = h.invertirHilera();//Prueba para invertir la hilera
         Hilera alfabetica = h.ordernarAlfabeticamente(); //Prueba para poner la hilera en orden alfabetico
         System.out.println(h.esPalindromo());//Prueba para saber si la hilera h es palindromo
         System.out.println(h.longitud());
-        Hilera d = h.subHilera(3, 4);  //Prueba para construir una subhilera d a partir de h     
+        Hilera d = h.subHilera(2, 2);  //Prueba para construir una subhilera d a partir de h     
         System.out.println("Hilera invertir: ");
         invertir.recorreIzqDer();
         System.out.println("Alfabeticamente: ");
@@ -52,9 +56,16 @@ public class newMain{
         n.recorreIzqDer();
         h.borrarHilera(3, 4); //Prueba de borrado parcial de una hilera
         System.out.println("Hilera h con borrar: ");
+        //h.recorreIzqDer();
+        //NodoDoble x = s.posicion(d);
+        //System.out.println(x.retornaDato());
+//        Hilera nueva =  (Hilera)listas.primerNodo().retornaDato();
+  //      nueva.recorreIzqDer();
+        /*h.borrarHilera();
+        h.recorreIzqDer();*/
+        h.replace("mario");
         h.recorreIzqDer();
-        NodoDoble x = s.posicion(d);
-        System.out.println(x.retornaDato());
+        System.out.println("final");
         
     }
     
