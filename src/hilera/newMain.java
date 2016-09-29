@@ -14,11 +14,7 @@ public class newMain{
      * @param args the command line arguments
      */
     public static void main(String[] args) 
-    {
-        Hilera h = new Hilera('a');//Construye la hilera h
-       // ListaDoblementeLigada listas = new ListaDoblementeLigada();
-        //listas.insertar(h, null);
-        NodoDoble p = h.primerNodo(); 
+    { 
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         String l = "";
@@ -26,47 +22,41 @@ public class newMain{
            {
                l = br.readLine();               
            }catch(IOException e){}
-        h.insertarHilera(l);
-        /*h.replace("mario");
-        h.recorreIzqDer();*/
-//        for(int i=0;i<l.length();i++) //Pasa el String a char y construye la hilera representada como Lista Doblemente Ligada
-//        {
-//            letra = l.charAt(i);
-//            h.insertar(letra, p);
-//            p = p.retornaLd();
-//        }
-        
+        Hilera h = new Hilera(/*l*/);
+        h.construirHilera(l);
         h.recorreIzqDer();//Prueba para recorre la hilera h una vez construida
         Hilera invertir = h.invertirHilera();//Prueba para invertir la hilera
         Hilera alfabetica = h.ordernarAlfabeticamente(); //Prueba para poner la hilera en orden alfabetico
-        System.out.println(h.esPalindromo());//Prueba para saber si la hilera h es palindromo
-        System.out.println(h.longitud());
+        System.out.println("¿Es palindromo? "+h.esPalindromo());//Prueba para saber si la hilera h es palindromo
+        System.out.println("Longitud: "+h.longitud());
+        System.out.println("Hilera d con subhilera de h: ");
         Hilera d = h.subHilera(2, 2);  //Prueba para construir una subhilera d a partir de h     
+        d.recorreIzqDer();
         System.out.println("Hilera invertir: ");
         invertir.recorreIzqDer();
         System.out.println("Alfabeticamente: ");
         alfabetica.recorreIzqDer();
-        System.out.println("Hilera d: ");
-        d.recorreIzqDer();
         Hilera s = h.copiaHilera(); //Prueba para crear una hilera s que sea copia de h
-        Hilera n = d.concat(s); //Prueba para concatenar la subhilera d con copia s en una hilera n
-        System.out.println("Hilera s: ");
+        System.out.println("Hilera s con copiaHilera de h");
         s.recorreIzqDer();
-        System.out.println("Hilera n : ");
+        Hilera n = s.concat(d); //Prueba para concatenar la subhilera d con copia s en una hilera n
+        System.out.println("Hilera n con concatenar d con s : ");
         n.recorreIzqDer();
-        h.borrarHilera(3, 4); //Prueba de borrado parcial de una hilera
+        h.borrarHilera(1, 3); //Prueba de borrado parcial de una hilera
         System.out.println("Hilera h con borrar: ");
-        //h.recorreIzqDer();
-        //NodoDoble x = s.posicion(d);
-        //System.out.println(x.retornaDato());
-//        Hilera nueva =  (Hilera)listas.primerNodo().retornaDato();
-  //      nueva.recorreIzqDer();
-        /*h.borrarHilera();
-        h.recorreIzqDer();*/
-        h.replace("mario");
         h.recorreIzqDer();
-        System.out.println("final");
-        
+        NodoDoble x = s.posicion(d);
+        System.out.println("Posición donde de comienza en s: "+x.retornaDato());
+        Hilera pruebaAnagrama = new Hilera();
+        pruebaAnagrama.construirHilera("nua");
+        pruebaAnagrama.recorreIzqDer();
+        Hilera pruebaString = new Hilera();
+        pruebaString.construirHilera("ua");
+        System.out.println("Es anagrama: "+pruebaAnagrama.anagrama(h));
+        System.out.println("¿ua substring de nua?"+pruebaAnagrama.esSubstring(pruebaString));
+        h.replace("holamariano");
+        System.out.println("Hilera con replace: ");
+        h.recorreIzqDer();
     }
     
 }

@@ -4,22 +4,18 @@ package hilera;
  * @author marioh.ramirez
  */
 public class Hilera extends ListaDoblementeLigada 
-{
-      
-    public Hilera(char letra)//Constructor de la clase Hilera
-    {
-        insertar(letra, null);//Inserta un char como primer nodo
-    }
+{      
+    public Hilera(){}//Constructor de la clase Hilera
     
-    public void insertarHilera(String palabra)
+    public void construirHilera(String hilera)
     {
         char letra;
-        letra = palabra.charAt(0);
+        letra = hilera.charAt(0);
         insertar(letra,null);
         NodoDoble p = primerNodo();
-        for(int i=1;i<palabra.length();i++) //Pasa el String a char y construye la hilera representada como Lista Doblemente Ligada
+        for(int i=1;i<hilera.length();i++) //Pasa el String a char y construye la hilera representada como Lista Doblemente Ligada
         {
-            letra = palabra.charAt(i);
+            letra = hilera.charAt(i);
             insertar(letra, p);
             p = p.retornaLd();
         }
@@ -38,7 +34,32 @@ public class Hilera extends ListaDoblementeLigada
         return i;
     }
     
-    public void anagrama(){}
+    public boolean anagrama(Hilera s)
+    {
+        int i;
+        NodoDoble k;
+        Hilera aux, car;
+        if(longitud()!= s.longitud())
+        {
+            return false;
+        }
+        aux = copiaHilera();
+        i = 1;
+        car = subHilera(i,1);
+        k = aux.posicion(car);
+        while(i<=longitud() && k!=null)
+        {
+            aux.borrar(k);
+            i = i+1;
+            if(i>longitud())
+            {
+                break;
+            }
+            car = subHilera(i,1);
+            k = aux.posicion(car); 
+        }
+        return i>longitud();//Retorna verdadero si i es mayor que la longitud de la hilera que llama el método, de lo contrario retorna falso
+    }
     
     public Hilera subHilera(int i, int j)//Devuelve una hilera desde la posición i de la hilera original y toma j caracteres
     {
@@ -64,31 +85,30 @@ public class Hilera extends ListaDoblementeLigada
             k = k+1;
         }
         k = 2;
-        char l = (char)p.retornaDato();
-        s = new Hilera(l);
+        s = new Hilera();
+        s.insertar(p.retornaDato(), null);
         p = p.retornaLd();
         while(k<=j)
         {
-            l = (char)p.retornaDato();
-            s.insertar(l, s.ultimoNodo());
+            s.insertar(p.retornaDato(), s.ultimoNodo());
             p = p.retornaLd();
             k = k+1;
         }
         return s;
     }
     
-    public Hilera concat(Hilera t)//Concatena la hilera que llame al método co´n la hilera t que se envia como parametro
+    public Hilera concat(Hilera s)//Concatena la hilera que llame al método co´n la hilera t que se envia como parametro
     {
-        Hilera s;
-        NodoDoble p = primerNodo();
-        s = copiaHilera();
-        p = t.primerNodo();
-        while(!t.finDeRecorrido(p))
+        Hilera t;
+        NodoDoble p;
+        t = copiaHilera();
+        p = s.primerNodo();
+        while(!s.finDeRecorrido(p))
         {
-           s.insertar(p.retornaDato(), s.ultimoNodo());
+           t.insertar(p.retornaDato(), t.ultimoNodo());
            p = p.retornaLd();
         }
-        return s;
+        return t;
     }
     
     public Hilera copiaHilera()//Copia la hilera que invoque el método en otra hilera
@@ -96,7 +116,8 @@ public class Hilera extends ListaDoblementeLigada
         Hilera s;
         NodoDoble p;
         p = primerNodo();
-        s = new Hilera((char)p.retornaDato());
+        s = new Hilera();
+        s.insertar(p.retornaDato(), null);
         p = p.retornaLd();
         while(!finDeRecorrido(p))
         {
@@ -106,7 +127,7 @@ public class Hilera extends ListaDoblementeLigada
         return s;
     } 
     
-    public void borrarHilera()
+    /*public void borrarHilera()
     {
         primerNodo().asignaLd(null);
         primerNodo().asignaLi(null);
@@ -114,7 +135,7 @@ public class Hilera extends ListaDoblementeLigada
         ultimoNodo().asignaLi(null);
         primerNodo().asignaDato(null);
         borrar(primerNodo());
-    }
+    }*/
     
     public void borrarHilera(int i, int j)//Borra parcial o totalmente una hilera
     {
@@ -171,14 +192,18 @@ public class Hilera extends ListaDoblementeLigada
                 q = s.primerNodo();
             }
         }
-        return null;
-        
+        return null;        
     }
     
-    public void replace(String s)            
+    public boolean esSubstring(Hilera b)
     {
-        borrarHilera();        
-        insertarHilera(s);        
+        return posicion(b)!=null;
+    }
+    
+    public void replace(String hilera)            
+    {
+        borrarHilera(1,longitud());
+        construirHilera(hilera);
     }
     
     public boolean esPalindromo() //Devuelve verdadero si la hilera es un palindromo
@@ -196,11 +221,7 @@ public class Hilera extends ListaDoblementeLigada
             i = i+1;
             j = j-1;
         }
-        if(i<j)
-        {
-            return false;
-        }
-        return true;
+        return i >= j;
     }
     
     public Hilera invertirHilera() //Devuelve una hilera invertida de la hilera original
@@ -208,7 +229,8 @@ public class Hilera extends ListaDoblementeLigada
         Hilera s;
         NodoDoble p, q;
         p = ultimoNodo();
-        s = new Hilera((char)p.retornaDato());
+        s = new Hilera();
+        s.insertar(p.retornaDato(), null);
         p = p.retornaLi();
         q = s.primerNodo();
         while(!finDeRecorrido(p))
@@ -223,27 +245,16 @@ public class Hilera extends ListaDoblementeLigada
     public Hilera ordernarAlfabeticamente() //Devulve la hilera original ordenada alfábeticamente
     {
         Hilera s;
-        char menor;
         NodoDoble p,y;
         p = primerNodo();
-        menor = (char)p.retornaDato();
+        s = new Hilera();
+        s.insertar(p.retornaDato(), null);
         p = p.retornaLd();
-        while(!finDeRecorrido(p)) //Busca el menor dato en la hilera original
-        {            
-            if((char)p.retornaDato()<menor)
-            {
-                menor = (char)p.retornaDato();
-            }
-            p = p.retornaLd();
-        }
-        s = new Hilera(menor);
-        p = primerNodo();
         while(longitud() != s.longitud()) //Ciclo en donde se insertan los datos en orden alfabetico en una nueva hilera
         {
             y = s.buscaDondeInsertar(p.retornaDato());
             s.insertar(p.retornaDato(), y);
             p = p.retornaLd();
-            System.out.println(longitud()+" "+s.longitud());
         }
         return s; //Retorna la nueva hilera en orden alfabetico
     }
