@@ -125,17 +125,7 @@ public class Hilera extends ListaDoblementeLigada
             p = p.retornaLd();
         }
         return s;
-    } 
-    
-    /*public void borrarHilera()
-    {
-        primerNodo().asignaLd(null);
-        primerNodo().asignaLi(null);
-        ultimoNodo().asignaLd(null);
-        ultimoNodo().asignaLi(null);
-        primerNodo().asignaDato(null);
-        borrar(primerNodo());
-    }*/
+    }     
     
     public void borrarHilera(int i, int j)//Borra parcial o totalmente una hilera
     {
