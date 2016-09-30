@@ -68,7 +68,7 @@ public class Inicio extends javax.swing.JFrame
         botonIngresarHilera = new javax.swing.JButton();
         panelOpciones = new javax.swing.JPanel();
         labelTituloOpciones = new javax.swing.JLabel();
-        listaOpciones = new javax.swing.JComboBox<String>();
+        listaOpciones = new javax.swing.JComboBox<>();
         botonAceptarOpcion = new javax.swing.JButton();
         campoTextoSegundoIngreso = new javax.swing.JTextField();
         labelIngresoSegundo = new javax.swing.JLabel();
@@ -95,7 +95,12 @@ public class Inicio extends javax.swing.JFrame
         labelTituloIngreso.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTituloIngreso.setText("Campo de ingreso de Datos");
 
-        botonBorrar.setText("Borrar Todo");
+        botonBorrar.setText("Borrar");
+        botonBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBorrarActionPerformed(evt);
+            }
+        });
 
         botonIngresarHilera.setText("Ingresar Hilera");
         botonIngresarHilera.addActionListener(new java.awt.event.ActionListener() {
@@ -142,7 +147,7 @@ public class Inicio extends javax.swing.JFrame
         labelTituloOpciones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTituloOpciones.setText("Opciones");
 
-        listaOpciones.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listaOpciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         botonAceptarOpcion.setText("Aceptar");
         botonAceptarOpcion.addActionListener(new java.awt.event.ActionListener() {
@@ -334,7 +339,24 @@ public class Inicio extends javax.swing.JFrame
         else if(opcion==2)
         {
             
+              s = campoTextoSegundoIngreso.getText();
+            
+                nueva = new Hilera();
+                nueva.construirHilera(s);
+                int n=original.posicionInt(original.posicion(nueva));
+                
+            if(0!=n&&original.esSubstring(nueva)){
+                original.borrarHilera(n+1,nueva.longitud());
+            }else{
+                 JOptionPane.showMessageDialog(null, "No es una subhilera de la original");
+            }
+            
+            labelHileraNueva.setText("");
+            imprimeHilera(original, labelHileraNueva);
+            System.out.println(n+nueva.longitud());
+            
         }
+        
         else if(opcion==3)
         {
             original.borrarHilera(1, original.longitud());
@@ -381,7 +403,7 @@ public class Inicio extends javax.swing.JFrame
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, "Ninguna de ambas es substring de la otra");
+                    JOptionPane.showMessageDialog(null, "Ninguna de las dos es substring de la otra");
                 } 
                 campoTextoSegundoIngreso.setText("");
             }
@@ -469,6 +491,11 @@ public class Inicio extends javax.swing.JFrame
 //             }
         //System.exit( 0 ); 
     }//GEN-LAST:event_botonSalirActionPerformed
+
+    private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
+        // TODO add your handling code here:
+        campoTextoIngreso.setText("");
+    }//GEN-LAST:event_botonBorrarActionPerformed
 
     /**
      * @param args the command line arguments

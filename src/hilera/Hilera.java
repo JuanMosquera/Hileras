@@ -185,6 +185,20 @@ public class Hilera extends ListaDoblementeLigada
         return null;        
     }
     
+     public int posicionInt(NodoDoble s)//Devuelve el nodo en el cuál comience la hilera que se ingresa como parámetro, dentro de otra hilera
+    {
+        NodoDoble p;
+        p = primerNodo();
+        int i=0;
+         while(p!=s)
+        {
+           i++;
+           p = p.retornaLd();
+        }
+        return i;
+              
+    }
+    
     public boolean esSubstring(Hilera b)
     {
         return posicion(b)!=null;
