@@ -478,7 +478,7 @@ public class Inicio extends javax.swing.JFrame
             nueva.borrarHilera(1,nueva.longitud());
             labelHileraOriginal.setText("");
             labelHileraNueva.setText("");
-      
+            campoTextoSegundoIngreso.setText("");
          botonAceptarOpcion.setEnabled(false); 
             listaOpciones.setEnabled(false);
             botonIngresarHilera.setEnabled(true);
