@@ -446,6 +446,28 @@ public class Inicio extends javax.swing.JFrame
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         // TODO add your handling code here:
+        
+        validador = validaDato(s);
+        if(validador==true){
+         
+//           int ax = JOptionPane.showConfirmDialog(null, "desea reiniciar o cerrar");
+//             if(ax == JOptionPane.YES_OPTION){
+                 original.borrarHilera(1,original.longitud());
+            nueva.borrarHilera(1,nueva.longitud());
+            labelHileraOriginal.setText("");
+            labelHileraNueva.setText("");
+      
+         botonAceptarOpcion.setEnabled(false); 
+            listaOpciones.setEnabled(false);
+            botonIngresarHilera.setEnabled(true);
+            campoTextoIngreso.setEnabled(true);
+            botonBorrar.setEnabled(true);
+            campoTextoSegundoIngreso.setEnabled(false); }
+                
+//             }else if(ax == JOptionPane.NO_OPTION){
+//                 System.exit(0);
+//             }
+        //System.exit( 0 ); 
     }//GEN-LAST:event_botonSalirActionPerformed
 
     /**
