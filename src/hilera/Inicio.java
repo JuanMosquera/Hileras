@@ -248,7 +248,7 @@ public class Inicio extends javax.swing.JFrame
                 .addContainerGap())
         );
 
-        botonSalir.setText("Salir");
+        botonSalir.setText("Reiniciar");
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonSalirActionPerformed(evt);
@@ -268,7 +268,7 @@ public class Inicio extends javax.swing.JFrame
                     .addComponent(panelOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(258, 258, 258)
+                .addGap(243, 243, 243)
                 .addComponent(botonSalir)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -315,181 +315,149 @@ public class Inicio extends javax.swing.JFrame
 
     private void botonAceptarOpcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarOpcionActionPerformed
         int opcion = listaOpciones.getSelectedIndex();
-        if(opcion==1)
-        {
-            s = campoTextoSegundoIngreso.getText();
-            validador = validaDato(s);
-            if(validador==true)
-            {
-                nueva = new Hilera();
-                nueva.construirHilera(s);
-                original = original.concat(nueva);
-                labelHileraOriginal.setText("");
-                labelHileraNueva.setText("");
-                imprimeHilera(original, labelHileraOriginal);
-                imprimeHilera(nueva, labelHileraNueva);
-                campoTextoSegundoIngreso.setText("");
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Debe ingresar una hilera a añadir.");
-            }
-            
-        }
-        else if(opcion==2)
-        {
-            
-              s = campoTextoSegundoIngreso.getText();
-            
+        switch (opcion) {
+            case 1:
+                s = campoTextoSegundoIngreso.getText();
+                validador = validaDato(s);
+                if(validador==true)
+                {
+                    nueva = new Hilera();
+                    nueva.construirHilera(s);
+                    original = original.concat(nueva);
+                    labelHileraOriginal.setText("");
+                    labelHileraNueva.setText("");
+                    imprimeHilera(original, labelHileraOriginal);
+                    imprimeHilera(nueva, labelHileraNueva);
+                    campoTextoSegundoIngreso.setText("");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Debe ingresar una hilera a añadir.");
+                }   break;
+            case 2:
+                s = campoTextoSegundoIngreso.getText();
                 nueva = new Hilera();
                 nueva.construirHilera(s);
                 int n=original.posicionInt(original.posicion(nueva));
-                
-            if(0!=n&&original.esSubstring(nueva)){
-                original.borrarHilera(n+1,nueva.longitud());
-            }else{
-                 JOptionPane.showMessageDialog(null, "No es una subhilera de la original");
-            }
-            
-            labelHileraNueva.setText("");
-            imprimeHilera(original, labelHileraNueva);
-            System.out.println(n+nueva.longitud());
-            
-        }
-        
-        else if(opcion==3)
-        {
-            original.borrarHilera(1, original.longitud());
-            labelHileraOriginal.setText("");
-            botonAceptarOpcion.setEnabled(false);
-            campoTextoSegundoIngreso.setEnabled(false);
-            listaOpciones.setEnabled(false);
-            campoTextoIngreso.setEnabled(true);
-            botonIngresarHilera.setEnabled(true);
-            botonBorrar.setEnabled(true);
-            
-        }
-        else if(opcion==4)
-        {
-            nueva = new Hilera();
-            nueva = original.invertirHilera();                
-            labelHileraNueva.setText("");
-            imprimeHilera(nueva, labelHileraNueva);
-        }
-        else if(opcion==5)
-        {
-            nueva = new Hilera();
-            nueva = original.ordernarAlfabeticamente();                
-            labelHileraNueva.setText("");
-            imprimeHilera(nueva, labelHileraNueva);
-        }
-        else if(opcion==6)
-        {
-            s = campoTextoSegundoIngreso.getText();
-            validador = validaDato(s);
-            if(validador==true)
-            {
-                nueva = new Hilera();
-                nueva.construirHilera(s);
-                labelHileraNueva.setText("");
-                imprimeHilera(nueva, labelHileraNueva);
-                if(original.esSubstring(nueva))
-                {
-                    JOptionPane.showMessageDialog(null, "La hilera ingresada es substring de la hilera original");
-                }
-                else if(nueva.esSubstring(original))
-                {
-                    JOptionPane.showMessageDialog(null, "La hilera original es substring de la hilera ingresada");
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(null, "Ninguna de las dos es substring de la otra");
-                } 
-                campoTextoSegundoIngreso.setText("");
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Debe ingresar una hilera a comparar.");
-            }
-        }
-        else if(opcion==7)
-        {
-            if(original.esPalindromo())
-            {
-                JOptionPane.showMessageDialog(null, "La hilera es un palindromo");
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "No es un palindromo");
-            }
-        }
-        else if(opcion==8)
-        {
-            s = campoTextoSegundoIngreso.getText();
-            validador = validaDato(s);
-            if(validador==true)
-            {
-                nueva = new Hilera();
-                nueva.construirHilera(s);
-                labelHileraNueva.setText("");
-                imprimeHilera(nueva, labelHileraNueva);
-                if(original.anagrama(nueva))
-                {
-                    JOptionPane.showMessageDialog(null, "Las hileras son anagramas");
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(null, "No son anagramas");
-                }
-                campoTextoSegundoIngreso.setText("");
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Debe ingresar una hilera a comparar.");
-            }
-        }
-        else if(opcion==9)
-        {
-            s = campoTextoIngreso.getText();
-            validador = validaDato(s);
-            if(validador==true)
-            {
-                original.replace(s);
+                if(0!=n&&original.esSubstring(nueva)){
+                    original.borrarHilera(n+1,nueva.longitud());
+                }else{
+                    JOptionPane.showMessageDialog(null, "No es una subhilera de la original");
+                }   labelHileraNueva.setText("");
+                imprimeHilera(original, labelHileraNueva);
+                System.out.println(n+nueva.longitud());
+                break;
+            case 3:
+                original.borrarHilera(1, original.longitud());
                 labelHileraOriginal.setText("");
-                imprimeHilera(original, labelHileraOriginal);
-                campoTextoSegundoIngreso.setText("");
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Debe ingresar una hilera para modificar la original.");
-            }
+                botonAceptarOpcion.setEnabled(false);
+                campoTextoSegundoIngreso.setEnabled(false);
+                listaOpciones.setEnabled(false);
+                campoTextoIngreso.setEnabled(true);
+                botonIngresarHilera.setEnabled(true);
+                botonBorrar.setEnabled(true);
+                break;
+            case 4:
+                nueva = new Hilera();
+                nueva = original.invertirHilera();
+                labelHileraNueva.setText("");
+                imprimeHilera(nueva, labelHileraNueva);
+                break;
+            case 5:
+                nueva = new Hilera();
+                nueva = original.ordernarAlfabeticamente();
+                labelHileraNueva.setText("");
+                imprimeHilera(nueva, labelHileraNueva);
+                break;
+            case 6:
+                s = campoTextoSegundoIngreso.getText();
+                validador = validaDato(s);
+                if(validador==true)
+                {
+                    nueva = new Hilera();
+                    nueva.construirHilera(s);
+                    labelHileraNueva.setText("");
+                    imprimeHilera(nueva, labelHileraNueva);
+                    if(original.esSubstring(nueva))
+                    {
+                        JOptionPane.showMessageDialog(null, "La hilera ingresada es substring de la hilera original");
+                    }
+                    else if(nueva.esSubstring(original))
+                    {
+                        JOptionPane.showMessageDialog(null, "La hilera original es substring de la hilera ingresada");
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Ninguna de las dos es substring de la otra");
+                    }
+                    campoTextoSegundoIngreso.setText("");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Debe ingresar una hilera a comparar.");
+                }   break;
+            case 7:
+                if(original.esPalindromo())
+                {
+                    JOptionPane.showMessageDialog(null, "La hilera es un palindromo");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "No es un palindromo");
+                }   break;
+            case 8:
+                s = campoTextoSegundoIngreso.getText();
+                validador = validaDato(s);
+                if(validador==true)
+                {
+                    nueva = new Hilera();
+                    nueva.construirHilera(s);
+                    labelHileraNueva.setText("");
+                    imprimeHilera(nueva, labelHileraNueva);
+                    if(original.anagrama(nueva))
+                    {
+                        JOptionPane.showMessageDialog(null, "Las hileras son anagramas");
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "No son anagramas");
+                    }
+                    campoTextoSegundoIngreso.setText("");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Debe ingresar una hilera a comparar.");
+                }   break;
+            case 9:
+                s = campoTextoSegundoIngreso.getText();
+                validador = validaDato(s);
+                if(validador==true)
+                {
+                    original.replace(s);
+                    labelHileraOriginal.setText("");
+                    imprimeHilera(original, labelHileraOriginal);
+                    campoTextoSegundoIngreso.setText("");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Debe ingresar una hilera para modificar la original.");
+                }   break;
+            default:
+                break;
         }
     }//GEN-LAST:event_botonAceptarOpcionActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        // TODO add your handling code here:
-        
-        validador = validaDato(s);
-        if(validador==true){
-         
-//           int ax = JOptionPane.showConfirmDialog(null, "desea reiniciar o cerrar");
-//             if(ax == JOptionPane.YES_OPTION){
-                 original.borrarHilera(1,original.longitud());
-            nueva.borrarHilera(1,nueva.longitud());
-            labelHileraOriginal.setText("");
-            labelHileraNueva.setText("");
-            campoTextoSegundoIngreso.setText("");
-         botonAceptarOpcion.setEnabled(false); 
-            listaOpciones.setEnabled(false);
-            botonIngresarHilera.setEnabled(true);
-            campoTextoIngreso.setEnabled(true);
-            botonBorrar.setEnabled(true);
-            campoTextoSegundoIngreso.setEnabled(false); }
-                
-//             }else if(ax == JOptionPane.NO_OPTION){
-//                 System.exit(0);
-//             }
-        //System.exit( 0 ); 
+        // TODO add your handling code here:       
+        labelHileraOriginal.setText("");
+        labelHileraNueva.setText("");
+        campoTextoSegundoIngreso.setText("");
+        botonAceptarOpcion.setEnabled(false);
+        listaOpciones.setEnabled(false);
+        botonIngresarHilera.setEnabled(true);
+        campoTextoIngreso.setEnabled(true);
+        botonBorrar.setEnabled(true);
+        campoTextoSegundoIngreso.setEnabled(false); 
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
